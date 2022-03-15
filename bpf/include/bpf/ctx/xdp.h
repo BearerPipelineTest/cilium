@@ -92,7 +92,6 @@ xdp_store_bytes(const struct xdp_md *ctx, __u64 off, const void *from,
  */
 
 #define ctx_change_type			xdp_change_type__stub
-#define ctx_change_proto		xdp_change_proto__stub
 #define ctx_change_tail			xdp_change_tail__stub
 
 #define ctx_pull_data(ctx, ...)		do { /* Already linear. */ } while (0)
@@ -193,6 +192,15 @@ l4_csum_replace(const struct xdp_md *ctx, __u64 off, __u32 from, __u32 to,
 			*sum = CSUM_MANGLED_0;
 	}
 	return ret;
+}
+
+static __always_inline __maybe_unused int
+ctx_change_proto(struct xdp_md *ctx __maybe_unused,
+		 const __be16 proto __maybe_unused,
+		 const __u64 flags __maybe_unused)
+{
+	/* To be implemented. */
+	return 0;
 }
 
 static __always_inline __maybe_unused int
